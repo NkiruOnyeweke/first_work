@@ -1,0 +1,97 @@
+USE faculty_file;
+
+CREATE TABLE students(
+            student_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            matric_num VARCHAR(30) NOT NULL,
+            first_name VARCHAR(50) NOT NULL,
+            middle_name VARCHAR(50),
+            surname VARCHAR(50) NOT NULL,
+            birth_date DATE NOT NULL,
+            email VARCHAR(100),
+            phone VARCHAR(50),
+            address VARCHAR(100) NOT NULL,
+            city VARCHAR(50) NOT NULL,
+            country VARCHAR(50) NOT NULL);
+            
+INSERT INTO students (matric_num, first_name, middle_name, surname, birth_date, email, phone, address, city, country)
+VALUES ('u2009/28493', 'opeyemi', 'charles', 'adegoke', '1997-03-16', 'yemicharles@gmail.com', '0802-364-8264', '6 transdane way', 'ibadan', 'nigeria'),
+		('u2009/28365', 'munachi', 'chelsea', 'ozoemena', '1995-06-06', 'munachelsea@yahoo.com', '0913-472-8463', '3 nnamani avenue', 'enugu', 'nigeria'),
+		('u2009/28537', 'jade', 'femi', 'abdul' '1997-11-04', 'femiabdul@gmail.com', '0904-574-9284', '2 cheremu cresent', 'lagos', 'nigeria'), 
+		('u2009/28365', 'chinonye', 'lilian', 'eze', '1996-07-17', '0718-376-8387', '134 old ojo road', 'lagos', 'nigeria'),
+		('u2009/28167', 'odion', 'roseline', 'efe', '1998-05-20', 'odionefe@yahoo.com', '58 oghenebiko street', 'benin', 'nigeria'),
+		('u2009/28637', 'anslem', 'jeff', 'assion', '1994-08-03', 'anslemassion@gmail.com', '0803-938-2117', '14, koffi street', 'asante', 'ghana'),
+		('u2009/28222', 'joseph', 'igbekele', '1999-12-25', 'joekele@yahoo.com' '0802-155-6223', 'a1 road d navy town', 'port-harcourt', 'nigeria'),
+		('u2009/28544', 'jidenna', 'andrew', 'chukwuma', '1999-04-19', 'chukwumaboy@hotmail.com', '6 babs animashaun street', 'lagos', 'nigeria'),
+		('u2009/28721', 'catherine', 'omoye', 'osayande', '1997-11-13', '0704-565-3383', '53 jurumaradi street', 'kano', 'nigeria'),
+		('u2009/28920', 'fummilayo', 'phoebe', 'folarin', '1997-03-28', 'finephoebe@gmail.com', '0816-490-8377', '7 ago palace way', 'lagos', 'nigeria'),
+		('u2009/28440', 'sotonye', 'jaja', 'damebi', '1996-08-30', 'sosoyeye@yahoo.com', '0814-586-8887', '2 bode thomas surulere', 'lagos', 'nigeria'),
+		('u2009/28805', 'johnson', 'harold', '1995-08-13', 'johnjohnson@yahoo.com', '0913-623-7665', 'aso villa headquaters', 'abuja', 'nigeria'),
+		('u2009/28154', 'michael', 'raphael', 'justice', '1996-11-10', 'mikraph@yahoo.com', '0802-376-7463', '6 joint avenue plaza fadiji', 'ogun', 'nigeria'),
+		('u2009/28330', 'omowummi', 'esther', 'bamidele', '1997-06-27', 'wummisexy@hotmail.com', '0907-328-4633', '16 effiok ikot way', 'cross river', 'nigeria'),
+		('u2009/28709', 'ngozi', 'immaculate', 'okafor', '1998-08-17', 'culata88@gmail.com', '88 bosede juction allen avenue', 'lagos', 'nigeria'),
+		('u2009/28516', 'nicole', 'frances', 'pierre', '1996-03-24', 'nicolepierre@yahoo.com', '0813-648-8467', 'eleganza la bourne park', 'galafi', 'togo'),
+		('u2009/28500', 'ebuka', 'jude', 'uchendu', '1996-09-26', 'judelaw@yahoo.com', '0712-485-7483', '20 omani cresent satellite town', 'port harcourt', 'nigeria'),
+		('u2009/28677', 'rita', 'mohammed', '1992-06-22', 'riritamo@gmail.com', '0819-600-4887', '17 hajara close maitama', 'niger', 'nigeria'),
+		('u2009/28102', 'samantha', 'chidera', 'amobi', '1998-02-19', 'sambabysam@yahoo.com', '0805-628-6547', '7 water resources warri', 'delta', 'nigeria'),
+		('u2009/28224', 'constance', 'akinyele', '1995-06-10', 'slaytance@gmail,com', '0911-098-8906', '98 ikare akoko juction', 'ondo', 'nigeria');
+            
+CREATE TABLE courses(
+            course_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            course_name VARCHAR (100) NOT NULL,
+            course_code VARCHAR(20) NOT NULL,
+            course_unit INT NOT NULL);
+            
+INSERT INTO courses (course_name, course_code, course_unit)
+VALUES('introduction to lingistics', 'lcs 100', 4),
+		('introduction to grammar', 'lcs 102', 3),
+    ('syntax', 'lcs 124', 6), 
+		('semantics', 'lcs 116', 6),
+		('morphology', 'lcs 118', 4),
+		('sociolinguistics', 'lcs 138', 3),
+		('applied linguistics', 'lcs 104', 3),
+		('computational linguistics', 'lcs 140', 4),
+		('history of thasaurus', 'lcs 126', 4),
+		('law and ethics of language', 'lcs 172', 3);
+        
+CREATE TABLE grading(
+            grade char(1) NOT NULL PRIMARY KEY,
+            score varchar(20) NOT NULL, 
+            remark varchar(20)NOT NULL);
+            
+INSERT INTO grading 
+VALUES('A', '100-70', 'Excellent'),
+        ('B', '69-60', 'Very good'),
+        ('C', '59-50', 'Good'),
+        ('D', '49-45', 'Poor'),
+        ('E', '44-40', 'Very poor'),
+        ('F', '39-0', 'Fail');
+        
+CREATE TABLE course_choices(
+			choice_id INT AUTO_INCREMENT PRIMARY KEY,
+			student_id INT NOT NULL,
+      course_id INT NOT NULL,
+      result INT ,
+ FOREIGN KEY(student_id) REFERENCES students (student_id),
+ FOREIGN KEY(course_id) REFERENCES courses (course_id)
+ );  
+
+INSERT INTO course_choices (student_id, course_id, result)
+VALUES(1, 1, 73), (1, 2, 65), (1, 6, 82), (1, 8, 73), (1, 9,91), (1, 10, 62), (2, 1, 54), (2, 4, 73), (2, 5, 69), (2, 6, 78), (2, 8, 86), (2, 9, 73), (3, 2, 79), (3, 3, 37), (3, 4, 55), (3, 5, 72), (3, 7, 86), (3, 10, 73), 
+		(4, 1, 93), (4, 3, 84), (4, 4, 89), (4, 7, 83), (4, 9, 56), (4, 10, 73), (5, 1, 67), (5, 2, 41), (5, 3, 0), (5, 4, 65), (5, 5, 73), (5, 6, 16),
+		(6, 4, 46), (6, 5, 50), (6,6, 33), (6, 7, 46), (6, 8, 56), (6,9, 64), (7, 2, 73), (7, 3, 82), (7, 4, 58), (7, 5, 70), (7 ,9, 33), (7, 10, 0), 
+    (8, 1, 73), (8, 2, 83), (8, 6, 61), (8, 8, 77), (8, 9, 72), (8, 10, 96), (9, 1, 71), (9, 5, 73), (9, 6, 73), (9, 8, 26), (9, 9, 49), (9, 10, 0),
+    (10, 2, 42), (10, 3, 60), (10, 4, 53), (10, 5, 68), (10, 7, 70), (10, 10, 65), (11, 1, 43), (11, 3, 71), (11, 4, 86), (11,7, 62), (11, 9,0), (11, 10, 60), 
+    (12, 1, 73), (12, 2, 69), (12, 3, 78), (12,4, 55), (12,5, 65), (12, 6, 46), (13, 3, 37), (13,4, 28), (13, 5, 72), (13, 6, 59), (13, 8, 51), (13,9, 93),
+    (14, 5, 73), (14, 6, 64), (14, 7, 76), (14, 8, 88), (14, 9, 73), (14, 10, 48), (15, 2, 0), (15, 3, 56), (15, 4, 73), (15, 5, 80), (15, 9, 16), (15, 10, 49), 
+    (16, 3, 64), (16, 4, 63), (16, 6,61), (16, 7, 74), (16, 8, 64), (16, 9, 73), (17, 1, 93), (17, 2, 82), (17, 6, 78), (17, 8, 76), (17, 9, 73), (17, 10, 0), 
+    (18, 1, 83), (18, 4, 76), (18, 5, 16), (18, 6, 72), (18, 8, 69), (18, 9, 71), (19, 2, 54), (19, 3, 68), (19, 4, 70), (19, 5, 53), (19, 7, 42), (19, 10, 60), (20, 1, 76), (20, 3, 68), (20, 4, 81), (20, 7, 65), (20, 9, 0), (20, 10,78), 
+    (21, 1, 71), (21, 3, 94), (21, 4, 69), (21, 7, 91), (21, 9, 73), (21, 10, 88);
+        
+
+CREATE TABLE new_table
+(SELECT cc.choice_id, s.first_name, s.matric_num, c.course_name, c.credit_unit, cc.result
+FROM course_choices cc
+LEFT JOIN students s
+USING(student_id)
+LEFT JOIN courses c
+USING (course_id));
