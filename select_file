@@ -1,0 +1,52 @@
+     #This part of my personal project demonstrates few ways to use SELECT statement to get bits of information which can be 
+     #further worked on or analysed for better results and understanding.
+
+SELECT choice_id, first_name, matric_num, course_name, credit_unit, result,
+	CASE WHEN result >69 THEN 'A'
+		WHEN result >59 THEN 'B'
+        WHEN result >49 THEN 'C'
+        WHEN result >44 THEN 'D'
+        WHEN result >39 THEN 'E'
+        ELSE 'F'
+        END AS 'grades'
+FROM new_table;
+
+		  #The syntax above returns a table containing fields from the table, 'new_table' and uses the case statement to group the 
+		  #'result' column as it has been grouped in the 'grading' table. There are other ways to add the grading levels(i.e, A-F) to this table, without introducing the case statement. 
+		  #One good way is to ensure that there is a foreign key in the 'grading' table, linking it to the primary key in the 'new_table' table.
+
+SELECT course_name, SUM(result) AS result
+FROM new_table
+GROUP BY course_name ORDER BY result DESC;
+
+		  #This command returns the aggregated scores of the courses taken ordered from highest to lowest. With this one can know which course is most preferred
+		  #by the student. To get the courses with the lowest grades coming first on the table, its is the same syntax but this time without the 'DESC'.
+      #To get just a limited amount, for instance, the first 5 on the list, it is expressed like so;
+        
+
+SELECT course_name, SUM(result) AS result
+FROM new_table
+GROUP BY course_name ORDER BY result DESC LIMIT 5;
+		
+        #Next command;
+        
+SELECT *
+FROM new_table
+WHERE result = 0;
+
+		  #Here we get all the courses with '0' as the result. 
+        
+SELECT course_name, COUNT(*) AS count
+FROM new_table
+WHERE result < 40
+GROUP BY course_name ORDER BY count;
+		
+       #For the above statement, what is returned are all the courses with results that are less than 40 or, according to the 'grading' table
+       #'F', with the number of "F's" in each course. The result is ordered in ascending ordrer. 
+        
+SELECT first_name, SUM(result) AS result
+FROM new_table
+GROUP BY first_name ORDER BY result DESC LIMIT 1;
+
+		  #The statement above returns the overall best student's name and the total sum of the student's result. Also to get the info for the student with 
+      #the least best result, it the same command, without the 'DESC'.
